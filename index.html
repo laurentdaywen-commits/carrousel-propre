@@ -10,9 +10,10 @@
 <div class="actions"><button id="scrub" disabled>🧽 Frotter</button><button id="rinse" class="secondary" disabled>🚿 Rincer</button><button id="inspect" class="warn">👷 Inspection du responsable</button></div></section>
 <aside class="panel"><h2 style="margin-top:0">📋 Consignes</h2><div class="rule"><b>Objectif :</b> nettoyer les 14 places du carrousel de sexage.</div><div class="rule"><b>Nettoyage :</b> sélectionne une place en 3D, frotte pour décoller les salissures puis rince.</div><div class="rule"><b>Inspection :</b> à la fin de chaque mission, le responsable vérifie les 14 places. Chaque place sale donne un avertissement.</div><div class="rule"><b>Attention :</b> au troisième avertissement, tu es licencié. GAME OVER !</div><h3>🗒️ Rapport de service</h3><div id="log"><p>• Prise de poste. Le carrousel attend son premier nettoyage.</p></div><div id="status">Mission 1 prête. À toi de jouer !</div></aside></main>
 <div class="overlay" id="overlay"><div class="modal"><h2 id="modalTitle"></h2><p id="modalText"></p><button id="modalButton">Continuer</button></div></div>
+<script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"}}</script>
 <script type="module">
-import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js';
-import { OrbitControls } from 'https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/controls/OrbitControls.js';
+import * as THREE from 'three';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 const TOTAL=14,$=id=>document.getElementById(id);let mission=1,warnings=0,selected=null,places=[],inspected=false,gameOver=false;
 const scene=new THREE.Scene();scene.background=new THREE.Color(0x101d25);scene.fog=new THREE.Fog(0x101d25,15,30);
 const camera=new THREE.PerspectiveCamera(48,1,.1,100);camera.position.set(10,11,13);
