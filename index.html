@@ -20,6 +20,9 @@ const target=new THREE.Vector3(0,1,0);let cameraYaw=.68,cameraPitch=.68,cameraDi
 scene.add(new THREE.HemisphereLight(0xc8eaff,0x26313a,2));const key=new THREE.DirectionalLight(0xffffff,2.5);key.position.set(6,12,7);key.castShadow=true;scene.add(key);
 const floor=new THREE.Mesh(new THREE.PlaneGeometry(200,200),new THREE.MeshStandardMaterial({color:0x26363d,roughness:.9}));floor.rotation.x=-Math.PI/2;floor.position.y=-.12;floor.receiveShadow=true;scene.add(floor);
 
+const carousel=new THREE.Group();scene.add(carousel);
+function mat(color,roughness=.65,metalness=.15){return new THREE.MeshStandardMaterial({color,roughness,metalness})}
+const steel=mat(0x82949a,.35,.75),dark=mat(0x344850,.5,.65),yellow=mat(0xe0a83e,.55,.25),cleanMat=mat(0x43b98c,.35,.3),dirtyMat=mat(0x75502e,1),selectedMat=mat(0x32d9d0,.3,.25);
 // Décor de couvoir : murs, éclairages, tuyauterie et zone technique
 const environment=new THREE.Group();scene.add(environment);
 const wallMat=mat(0x52646a,.9,.1),panelMat=mat(0x9aabb0,.55,.35),pipeMat=mat(0x71858a,.35,.7);
@@ -28,9 +31,7 @@ box(environment,22,5,.35,0,2.4,-8,wallMat);box(environment,.35,5,16,-10.8,2.4,0,
 for(let x=-8;x<=8;x+=4){box(environment,3.6,2.4,.12,x,2.1,-7.78,panelMat);const lamp=new THREE.Mesh(new THREE.BoxGeometry(2.1,.08,.35),new THREE.MeshBasicMaterial({color:0xdaf7ff}));lamp.position.set(x,4.55,-7.55);environment.add(lamp)}
 for(let z=-5;z<=5;z+=5){const pipe=new THREE.Mesh(new THREE.CylinderGeometry(.07,.07,18,12),pipeMat);pipe.rotation.z=Math.PI/2;pipe.position.set(0,3.8,z);environment.add(pipe)}
 for(let x=-8;x<=8;x+=4){box(environment,1.2,.8,.8,x,.4,-5.9,dark);box(environment,1.1,.12,.7,x,.86,-5.9,yellow)}
-const carousel=new THREE.Group();scene.add(carousel);
-function mat(color,roughness=.65,metalness=.15){return new THREE.MeshStandardMaterial({color,roughness,metalness})}
-const steel=mat(0x82949a,.35,.75),dark=mat(0x344850,.5,.65),yellow=mat(0xe0a83e,.55,.25),cleanMat=mat(0x43b98c,.35,.3),dirtyMat=mat(0x75502e,1),selectedMat=mat(0x32d9d0,.3,.25);
+
 const disk=new THREE.Mesh(new THREE.CylinderGeometry(4.5,4.7,.38,64),dark);disk.position.y=.45;disk.receiveShadow=true;disk.castShadow=true;carousel.add(disk);
 const rim=new THREE.Mesh(new THREE.TorusGeometry(4.55,.13,12,80),steel);rim.rotation.x=Math.PI/2;rim.position.y=.68;carousel.add(rim);
 const hub=new THREE.Mesh(new THREE.CylinderGeometry(.8,1,.8,32),steel);hub.position.y=.85;carousel.add(hub);
